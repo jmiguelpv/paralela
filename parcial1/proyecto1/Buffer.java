@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 public class Buffer {
 
     private int[] buff;
-    private int i = 0;
+    public int i = 0;
     private Semaphore hayEspacio;
 
     public Buffer(int tam){
@@ -20,10 +20,8 @@ public class Buffer {
             return true;
         }
         buff[i] = dato;
-        //System.out.println(name + " produce "+dato);
         i=(i+1)%buff.length;
-        System.out.println(i +" "+ name);
-        Thread.sleep(300);
+        Thread.sleep(200);
         hayEspacio.release();
 
         return false;
@@ -32,15 +30,13 @@ public class Buffer {
 
     public int extraer(String name) throws InterruptedException{
         hayEspacio.acquire();
-        //System.out.println("consumidor Consume" +buff[aux]);
         if((i-1)%buff.length <= 0 ){
             hayEspacio.release();
             return 0;
         }
         i = (i-1)%buff.length;
-        hayEspacio.release();
-        System.out.println(i+" consume "+ name);
         Thread.sleep(100);
+        hayEspacio.release();
         return i;
     }
 
