@@ -1,5 +1,5 @@
 
-import java.util.concurrent.*;
+import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
 
 

@@ -1,12 +1,15 @@
 
 import java.util.Stack;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Main extends JFrame implements ActionListener, KeyListener{
+
+public class Main extends JFrame implements ActionListener{
     public Stack<Productor> stackProductores;
     public Stack<Consumidor> stackConsumidores;
     public Buffer buf;
@@ -96,7 +99,6 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 
     public JLabel createImageLabel(Stack stack, ImageIcon image,int xbound){
         JLabel label = new JLabel(image);
-
         label.setBounds(xbound,(60)*(stack.size()),400,60);
         label.setLayout(null);
         this.change = true;
@@ -163,13 +165,5 @@ public class Main extends JFrame implements ActionListener, KeyListener{
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e){}
-
-    @Override
-    public void keyPressed(KeyEvent e){}
-
-    @Override
-    public void keyTyped(KeyEvent e){}
 
 }
