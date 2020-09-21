@@ -22,25 +22,24 @@ public class Main extends JFrame implements ActionListener{
     public JButton destroyProductorButton;
     public JButton destroyConsumidorButton;
     public JButton crearConsumidorButton;
-    public JLabel label;
+    public JLabel labelBuffer;
     public JFrame frame;
 
 
     public Main(){
         frame = new JFrame();
+        change = false;
 
         consumidorImg = new ImageIcon("provedor.png");
         productorImg = new ImageIcon("consumidor.png");
 
-        change = false;
 
-        JLabel labelBuffer = new JLabel();
-
+        labelBuffer = new JLabel();
         labelBuffer.setBounds(400,700,500,60);
         labelBuffer.setLayout(null);
         frame.add(labelBuffer);
-
         buf = new Buffer(100,labelBuffer);
+
         stackProductores = new Stack<Productor>();
         stackConsumidores = new Stack<Consumidor>();
 
@@ -108,12 +107,12 @@ public class Main extends JFrame implements ActionListener{
 
     public void destroyImageLabel(JLabel label){
         frame.remove(label);
-        change = true;
+        this.change = true;
     }
 
     public void createProductor(String name){
-        JLabel label2 = this.createImageLabel(stackProductores,productorImg,20);
-        Productor productor = new Productor(this.buf,name,label2);
+        JLabel label = this.createImageLabel(stackProductores,productorImg,20);
+        Productor productor = new Productor(this.buf,name,label);
         productor.start();
         stackProductores.push(productor);
     }
@@ -127,8 +126,8 @@ public class Main extends JFrame implements ActionListener{
     }
 
     public void createConsumidor(String name){
-        this.label = this.createImageLabel(stackConsumidores,consumidorImg,600);
-        Consumidor consumidor = new Consumidor(this.buf,name,this.label);
+        JLabel label = this.createImageLabel(stackConsumidores,consumidorImg,600);
+        Consumidor consumidor = new Consumidor(this.buf,name,label);
         consumidor.start();
         stackConsumidores.push(consumidor);
     }
