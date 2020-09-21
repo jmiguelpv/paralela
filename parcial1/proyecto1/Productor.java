@@ -1,7 +1,5 @@
-
-
 import java.util.Random;
-import javax.swing.*;
+import javax.swing.JLabel;
 
 
 public class Productor extends Thread{
@@ -20,19 +18,22 @@ public class Productor extends Thread{
         this.contador=0;
         this.run = true;
         this.label = label;
+        this.label.setText(name+" me crearon.");
     }
 
     @Override
     public void run(){
         while(run){
+            int aux = r.nextInt(100);
             try{
-                System.out.println(this.name+" running");
-                int aux = r.nextInt(100);
                 if(buf.poner(aux,name)){
-                    System.out.println(this.name+" sleep---------------------------");
+                    this.label.setText(name+" me durmieron");
                     Thread.sleep(6000);
+                }else{
+                    this.label.setText(name+" agregue producto");
                 }
                 Thread.sleep(1000);
+                this.label.setText(name+" espero ");
             }catch(InterruptedException ex){
                 ex.printStackTrace();
             }
@@ -40,7 +41,6 @@ public class Productor extends Thread{
     }
 
     public void stopped(){
-        System.out.println(this.name+" ded");
         run = false;
     }
 }

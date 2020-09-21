@@ -1,15 +1,22 @@
 
 import java.util.concurrent.*;
+import javax.swing.JLabel;
+
+
 
 public class Buffer {
 
     private int[] buff;
     public int i = 0;
     private Semaphore hayEspacio;
+    public JLabel label;
 
-    public Buffer(int tam){
+    public Buffer(int tam, JLabel label){
         buff = new int[tam];
+        this.label = label;
         hayEspacio = new Semaphore(1,true);
+        this.label.setText("me crearon -------- Cantidad :"+i);
+
     }
 
     public boolean poner(int dato, String name) throws InterruptedException{
@@ -21,7 +28,8 @@ public class Buffer {
         }
         buff[i] = dato;
         i=(i+1)%buff.length;
-        Thread.sleep(200);
+        this.label.setText("me llenan -------- Cantidad :"+i);
+        Thread.sleep(1000);
         hayEspacio.release();
 
         return false;
@@ -35,7 +43,8 @@ public class Buffer {
             return 0;
         }
         i = (i-1)%buff.length;
-        Thread.sleep(100);
+        this.label.setText("me Vacian----------- Cantidad :"+i);
+        Thread.sleep(1000);
         hayEspacio.release();
         return i;
     }

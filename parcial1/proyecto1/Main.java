@@ -30,7 +30,14 @@ public class Main extends JFrame implements ActionListener, KeyListener{
         productorImg = new ImageIcon("consumidor.png");
 
         change = false;
-        buf = new Buffer(100);
+
+        JLabel labelBuffer = new JLabel();
+
+        labelBuffer.setBounds(400,700,500,60);
+        labelBuffer.setLayout(null);
+        frame.add(labelBuffer);
+
+        buf = new Buffer(100,labelBuffer);
         stackProductores = new Stack<Productor>();
         stackConsumidores = new Stack<Consumidor>();
 
@@ -52,7 +59,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
         crearConsumidorButton.addActionListener(this);
         frame.add(crearConsumidorButton);
 
-        destroyConsumidorButton = new JButton("Destruir Productor");
+        destroyConsumidorButton = new JButton("Destruir Consumidor");
         destroyConsumidorButton.setBounds(400,900,200,30);
         destroyConsumidorButton.setActionCommand("destroyConsumidor");
         destroyConsumidorButton.addActionListener(this);
@@ -90,7 +97,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     public JLabel createImageLabel(Stack stack, ImageIcon image,int xbound){
         JLabel label = new JLabel(image);
 
-        label.setBounds(xbound,(60)*(stack.size()),60,60);
+        label.setBounds(xbound,(60)*(stack.size()),400,60);
         label.setLayout(null);
         this.change = true;
         frame.add(label);
