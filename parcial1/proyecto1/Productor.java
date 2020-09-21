@@ -10,7 +10,7 @@ public class Productor extends Thread{
     private Boolean full, run;
     private int contador;
     private Buffer buf;
-    private String name;
+    public String name;
     public JLabel label;
 
 

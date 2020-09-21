@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Consumidor extends Thread{
     private Buffer buf;
-    private String name;
+    public String name;
     private Boolean run;
     public JLabel label;
 

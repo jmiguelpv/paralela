@@ -73,28 +73,11 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 
     public void start(){
         while(true){
-            // Iterator<Consumidor> consumidores = stackConsumidores.iterator();
-            // Iterator<Productor> productores = stackProductores.iterator();
-            //System.out.println(this.buf.i);
 
-            //while (consumidores.hasNext()) {
-                //Productor productorToCheck = stackProductores.pop();
-                //System.out.println(productorToCheck.getState());
-                //stackProductores.push(productorToCheck);
-            //}
-            //while (productores.hasNext()) {
-                // Productor productor = productores.next();
-                // this.destroyImageLabel(productor.label);
-                //productores.next();
-                //Productor productorToCheck = stackProductores.pop();
-                //System.out.println(productorToCheck.getState());
-                //stackProductores.push(productorToCheck);
-            //}
             if(change){
                 SwingUtilities.updateComponentTreeUI(frame);
                 change = false;
             }
-
             try{
                 Thread.sleep(16);
             }catch(InterruptedException ex){
