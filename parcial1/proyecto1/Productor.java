@@ -1,46 +1,42 @@
 import java.util.Random;
 import javax.swing.JLabel;
 
-
-public class Productor extends Thread{
+public class Productor extends Thread {
 
     private Random r = new Random();
-    private Boolean full, run;
-    private int contador;
+    private Boolean run;
     private Buffer buf;
     public String name;
     public JLabel label;
 
-
-    public Productor (Buffer buf, String name,JLabel label){
+    public Productor(Buffer buf, String name, JLabel label) {
         this.name = name;
         this.buf = buf;
-        this.contador=0;
         this.run = true;
         this.label = label;
-        this.label.setText(name+" me crearon.");
+        this.label.setText(name + "Nuevo panadero.");
     }
 
     @Override
-    public void run(){
-        while(run){
+    public void run() {
+        while (run) {
             int aux = r.nextInt(100);
-            try{
-                if(buf.poner(aux,name)){
-                    this.label.setText(name+" me durmieron");
+            try {
+                if (buf.poner(aux, name)) {
+                    this.label.setText(name + "Estoy descanzando.");
                     Thread.sleep(6000);
-                }else{
-                    this.label.setText(name+" agregue producto");
+                } else {
+                    this.label.setText(name + "Horneando.");
                 }
                 Thread.sleep(1000);
-                this.label.setText(name+" espero ");
-            }catch(InterruptedException ex){
+                this.label.setText(name + "El pan se enfria!!");
+            } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         }
     }
 
-    public void stopped(){
+    public void stopped() {
         run = false;
     }
 }
