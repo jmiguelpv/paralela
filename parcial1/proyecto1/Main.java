@@ -17,10 +17,10 @@ public class Main extends JFrame implements ActionListener {
     public ImageIcon productorImg;
     public ImageIcon consumidorImg;
 
-    public JButton crearProductorButton;
-    public JButton destroyProductorButton;
-    public JButton destroyConsumidorButton;
-    public JButton crearConsumidorButton;
+    public JButton newPanaderoBTN;
+    public JButton killPanaderoBTN;
+    public JButton newaldeanoBTN;
+    public JButton killAldeanoBTN;
     public JLabel labelBuffer;
     public JFrame frame;
 
@@ -28,8 +28,10 @@ public class Main extends JFrame implements ActionListener {
         frame = new JFrame();
         change = false;
 
-        consumidorImg = new ImageIcon("provedor.png");
-        productorImg = new ImageIcon("consumidor.png");
+        productorImg = new ImageIcon(
+                "C:/Users/Juan Carlos/OneDrive/tarea/Paralela/Migue/paralela/parcial1/proyecto1/productor.png");
+        consumidorImg = new ImageIcon(
+                "C:/Users/Juan Carlos/OneDrive/tarea/Paralela/Migue/paralela/parcial1/proyecto1/consumidor.png");
 
         labelBuffer = new JLabel();
         labelBuffer.setBounds(400, 700, 500, 60);
@@ -40,29 +42,29 @@ public class Main extends JFrame implements ActionListener {
         stackProductores = new Stack<Productor>();
         stackConsumidores = new Stack<Consumidor>();
 
-        crearProductorButton = new JButton("Contratar Panadero");
-        crearProductorButton.setBounds(50, 800, 200, 30);
-        crearProductorButton.setActionCommand("createProductor");
-        crearProductorButton.addActionListener(this);
-        frame.add(crearProductorButton);
+        newPanaderoBTN = new JButton("Contratar panadero");
+        newPanaderoBTN.setBounds(50, 800, 200, 30);
+        newPanaderoBTN.setActionCommand("newPanadero");
+        newPanaderoBTN.addActionListener(this);
+        frame.add(newPanaderoBTN);
 
-        destroyProductorButton = new JButton("Destruir Productor");
-        destroyProductorButton.setBounds(50, 900, 200, 30);
-        destroyProductorButton.setActionCommand("destroyProductor");
-        destroyProductorButton.addActionListener(this);
-        frame.add(destroyProductorButton);
+        killPanaderoBTN = new JButton("Matar panadero");
+        killPanaderoBTN.setBounds(50, 900, 200, 30);
+        killPanaderoBTN.setActionCommand("killPanadero");
+        killPanaderoBTN.addActionListener(this);
+        frame.add(killPanaderoBTN);
+        newaldeanoBTN = new JButton("Agregar aldeano");
 
-        crearConsumidorButton = new JButton("Crear Consumidor");
-        crearConsumidorButton.setBounds(400, 800, 200, 30);
-        crearConsumidorButton.setActionCommand("createConsumidor");
-        crearConsumidorButton.addActionListener(this);
-        frame.add(crearConsumidorButton);
+        newaldeanoBTN.setBounds(400, 800, 200, 30);
+        newaldeanoBTN.setActionCommand("newAldeano");
+        newaldeanoBTN.addActionListener(this);
+        frame.add(newaldeanoBTN);
 
-        destroyConsumidorButton = new JButton("Destruir Consumidor");
-        destroyConsumidorButton.setBounds(400, 900, 200, 30);
-        destroyConsumidorButton.setActionCommand("destroyConsumidor");
-        destroyConsumidorButton.addActionListener(this);
-        frame.add(destroyConsumidorButton);
+        killAldeanoBTN = new JButton("Matar aldeano");
+        killAldeanoBTN.setBounds(400, 900, 200, 30);
+        killAldeanoBTN.setActionCommand("killAldeano");
+        killAldeanoBTN.addActionListener(this);
+        frame.add(killAldeanoBTN);
 
         frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,12 +75,10 @@ public class Main extends JFrame implements ActionListener {
     public static void main(String[] args) {
         Main main = new Main();
         main.start();
-
     }
 
     public void start() {
         while (true) {
-
             if (change) {
                 SwingUtilities.updateComponentTreeUI(frame);
                 change = false;
@@ -105,14 +105,14 @@ public class Main extends JFrame implements ActionListener {
         this.change = true;
     }
 
-    public void createProductor(String name) {
+    public void newPanadero(String name) {
         JLabel label = this.createImageLabel(stackProductores, productorImg, 20);
         Productor productor = new Productor(this.buf, name, label);
         productor.start();
         stackProductores.push(productor);
     }
 
-    public void destroyProductor() {
+    public void killPanadero() {
         if (stackProductores.size() > 0) {
             Productor productor = stackProductores.pop();
             productor.stopped();
@@ -120,14 +120,14 @@ public class Main extends JFrame implements ActionListener {
         }
     }
 
-    public void createConsumidor(String name) {
+    public void newAldeano(String name) {
         JLabel label = this.createImageLabel(stackConsumidores, consumidorImg, 600);
         Consumidor consumidor = new Consumidor(this.buf, name, label);
         consumidor.start();
         stackConsumidores.push(consumidor);
     }
 
-    public void destroyConsumidor() {
+    public void killAldeano() {
         if (stackConsumidores.size() > 0) {
             Consumidor consumidor = stackConsumidores.pop();
             consumidor.stopped();
@@ -138,22 +138,21 @@ public class Main extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch ((String) (e.getActionCommand())) {
-            case "createProductor":
-                this.createProductor("Panadero " + stackProductores.size());
+            case "newPanadero":
+                this.newPanadero("Panadero " + stackProductores.size());
                 break;
 
-            case "destroyProductor":
-                this.destroyProductor();
+            case "killPanadero":
+                this.killPanadero();
                 break;
 
-            case "createConsumidor":
-                this.createConsumidor("Aldeano " + stackConsumidores.size());
+            case "newAldeano":
+                this.newAldeano("Aldeano " + stackConsumidores.size());
                 break;
 
-            case "destroyConsumidor":
-                this.destroyConsumidor();
+            case "killAldeano":
+                this.killAldeano();
                 break;
-
             default:
                 break;
         }
