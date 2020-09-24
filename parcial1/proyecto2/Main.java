@@ -118,11 +118,4 @@ public class Main extends JFrame {
         return label;
     }
 
-    public void createFilosofo(String name){
-        // JLabel label = this.createImageLabel(stackConsumidores,consumidorImg,600);
-        // Filosofo filosofo = new Filosofo(this.buf,name,label);
-        // consumidor.start();
-        // stackConsumidores.push(consumidor);
-    }
-
 }
