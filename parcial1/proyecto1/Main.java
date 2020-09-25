@@ -53,7 +53,7 @@ public class Main extends JFrame implements ActionListener {
         killPanaderoBTN.setActionCommand("killPanadero");
         killPanaderoBTN.addActionListener(this);
         frame.add(killPanaderoBTN);
-        newaldeanoBTN = new JButton("Agregar aldeano");
+        newaldeanoBTN = new JButton("Concebir aldeano");
 
         newaldeanoBTN.setBounds(400, 800, 200, 30);
         newaldeanoBTN.setActionCommand("newAldeano");
