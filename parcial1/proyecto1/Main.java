@@ -30,8 +30,8 @@ public class Main extends JFrame implements ActionListener{
         frame = new JFrame();
         change = false;
 
-        consumidorImg = new ImageIcon("provedor.png");
-        productorImg = new ImageIcon("consumidor.png");
+        consumidorImg = new ImageIcon("tuxProvedor.png");
+        productorImg = new ImageIcon("tuxConsumidor.png");
 
 
         labelBuffer = new JLabel();
