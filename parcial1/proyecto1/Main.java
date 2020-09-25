@@ -12,6 +12,7 @@ public class Main extends JFrame implements ActionListener {
     public Stack<Productor> stackProductores;
     public Stack<Consumidor> stackConsumidores;
     public Buffer buf;
+    public Despertador despertador;
 
     public Boolean change;
     public ImageIcon productorImg;
@@ -37,7 +38,8 @@ public class Main extends JFrame implements ActionListener {
         labelBuffer.setBounds(400, 700, 500, 60);
         labelBuffer.setLayout(null);
         frame.add(labelBuffer);
-        buf = new Buffer(100, labelBuffer);
+        buf = new Buffer(20, labelBuffer);
+        despertador = new Despertador();
 
         stackProductores = new Stack<Productor>();
         stackConsumidores = new Stack<Consumidor>();
@@ -107,7 +109,7 @@ public class Main extends JFrame implements ActionListener {
 
     public void newPanadero(String name) {
         JLabel label = this.createImageLabel(stackProductores, productorImg, 20);
-        Productor productor = new Productor(this.buf, name, label);
+        Productor productor = new Productor(this.buf, name, label, despertador);
         productor.start();
         stackProductores.push(productor);
     }
@@ -122,7 +124,7 @@ public class Main extends JFrame implements ActionListener {
 
     public void newAldeano(String name) {
         JLabel label = this.createImageLabel(stackConsumidores, consumidorImg, 600);
-        Consumidor consumidor = new Consumidor(this.buf, name, label);
+        Consumidor consumidor = new Consumidor(this.buf, name, label, despertador);
         consumidor.start();
         stackConsumidores.push(consumidor);
     }

@@ -17,17 +17,18 @@ public class Buffer {
         this.label.setText("Panes en almacen: " + i);
     }
 
-    public boolean guardar() throws InterruptedException {
+    public int guardar() throws InterruptedException {
         puerta.acquire();
         if (i >= max) {
             puerta.release();
-            return true;
+            return max;
         }
         i += 1;
         this.label.setText("Guardando pan: " + i);
         Thread.sleep(1000);
+        this.label.setText("Panes en almacen: " + i);
         puerta.release();
-        return false;
+        return i;
     }
 
     public int sacar() throws InterruptedException {
@@ -39,6 +40,7 @@ public class Buffer {
         this.label.setText("Sacando pan\n " + i + " Panes guardados ");
         i -= 1;
         Thread.sleep(1000);
+        this.label.setText("Panes en almacen: " + i);
         puerta.release();
         return i;
     }

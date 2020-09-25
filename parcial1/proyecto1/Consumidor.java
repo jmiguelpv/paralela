@@ -3,18 +3,20 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Consumidor extends Thread {
     private Buffer buf;
-    public String name;
+    private String name;
     private Boolean run;
-    public JLabel label;
+    JLabel label;
     private Boolean awake;
+    private Despertador despertador;
 
-    public Consumidor(Buffer b, String name, JLabel label) {
+    public Consumidor(Buffer b, String name, JLabel label, Despertador despertador) {
         this.buf = b;
         this.run = true;
         this.name = name;
         this.label = label;
         this.label.setText(name + "Nuevo aldeano.");
         this.awake = true;
+        this.despertador = despertador;
     }
 
     @Override
@@ -22,11 +24,17 @@ public class Consumidor extends Thread {
         while (run) {
             int aux;
             try {
+                if (despertador.awakeAldeanos) {
+                    awake = true;
+                }
                 if (awake) {
                     aux = buf.sacar();
                     if (aux == 0) {
                         awake = false;
                     } else {
+                        if (aux < 5) {
+                            despertador.awakePanaderos = true;
+                        }
                         this.label.setText(name + " Comiendo");
                         Thread.sleep(1000);
                         this.label.setText(name + " Saciado");
@@ -36,9 +44,6 @@ public class Consumidor extends Thread {
                 } else {
                     this.label.setText(name + " Hibernando");
                     Thread.sleep(1000);
-                    if (buf.i > 5) {
-                        awake = true;
-                    }
                 }
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
